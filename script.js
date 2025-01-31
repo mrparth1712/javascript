@@ -10,6 +10,7 @@ function telecomService() {
         );
        switch(englishOption){
             case 1:
+              console.log("data")
                 alert("You have successfully done an Internet Recharge.");
                 break;
               case 2:
