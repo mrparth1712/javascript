@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>string and methods</title>
+</head>
+<body>
+    <script>
+        //aanu output console ma jovu
+        let message='hello';
+        console.log(message.length);
+      
+
+        //uppercase
+        let text='parth';
+        console.log(text.toUpperCase());
+        
+
+        //lowercase
+        let number="HELLO";
+        console.log(number.toLowerCase());
+
+     // trim extra space destroy 2 methods to start and to end
+      var faltuMessage="               hyy  i am  parth";   
+     console.log(faltuMessage.trimStart());    
+
+     var faltuMessage="hyy  i am parth        ";   
+     console.log(faltuMessage.trimEnd());    
+
+          
+
+        //methods include used to check msg true or false ex tme lol lidhu eene include thi cehck karavyu to lol madse to true aapse baki  false aapse
+
+        let faltu="lol";
+        console.log(faltu.includes("hello"));
+        console.log(faltu.includes("lol"));
+
+        //indexof() je string character aapo eeni index find karine aape
+        let count="hyy i am a mern stack devloper";
+        console.log(count.indexOf("y"));
+
+
+        // replace() je string hoi eene tamare badline biji aapvi hoi tyre use thai
+        let finalmsg="hello mern";
+        console.log(finalmsg.replace("hello","hi"));
+
+        //replace all()
+        let finalkey="hyy parth";
+        console.log(finalkey.replaceAll("hyy mern"));
+
+        //concat() bey string ne add kari dey
+
+        let add="hyyy";
+        console.log(add.concat("priyanshu"));
+
+        //padstart()start ma symbol aapi dey ex*@
+
+        let final='1234';
+        console.log(final.padStart('12','*'));
+
+        //padend()last ma symbol aapi dey ex*@
+
+        let end='3456';
+        console.log(end.padEnd('12','*'));
+
+        //charat()char aape find kare
+
+        let at="my name is parth";
+        console.log(at.charAt(3));
+
+        //charcodeat()char no code aape ex asciii value aape
+        let code="hello how are you?";
+        console.log(code.charCodeAt("h"));
+
+        //split array ma badli nakhe
+        let name="hello";
+        console.log(name.split());
+
+        //$ thi krva mate
+        const concatstring=`last four digit my acc number ${end.padEnd('12','*')}.`;
+        console.log(concatstring);
+
+         
+</script>
+</body>
+</html>
