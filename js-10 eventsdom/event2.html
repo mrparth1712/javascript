@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create me</title>
+    <style>
+        #box{
+            
+            width: 200px;
+            height: 200px;
+            border: 1px solid red;
+        }
+        .p{
+            color: blue;
+            transform: rotate(180deg);
+            text-align: center;
+        }
+        .boxs{
+            text-transform: uppercase;
+            padding: 40px;
+        }
+       
+
+    </style>
+</head>
+<body>
+    
+
+    <!-- buuton uper click thai  tyre console ma dekhai ee mate -->
+   <button onmouseover="change()">click me</button>
+   <div id="box" class="boxs">
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vero, beatae.</p>
+   </div>
+   <button onclick="color()">magic</button>
+   <button onclick="remove()">remove magic</button>
+
+
+  
+
+   <!-- toggle eetle eekj button ma bey kam eek sathe work krse -->
+
+
+   <button id="cha" onclick="toggle()">both button work single button</button>
+
+
+   <!-- change background -->
+    <input type="button" value="change background" onclick="changebackground()">
+    <script>
+        function change(){
+          alert("ha boliye");
+        }
+
+        function color(){
+            document.getElementById('box').classList.add("p");
+        }
+        function remove(){
+            document.getElementById('box').classList.remove("p");
+        }
+
+        function toggle(){
+            document.getElementById('box').classList.toggle("p");
+            let p=document.getElementById('box').classList.contains("boxs");
+            console.log(p);
+        }
+        
+        function changebackground(){
+            document.body.style.background="yellow";
+        }
+    </script>
+
+
+
+
+</body>
+</html>

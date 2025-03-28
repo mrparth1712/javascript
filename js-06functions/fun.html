@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>function</title>
+</head>
+<body>
+    <script>
+        //function banava mate function keyword lakhvu pchi () and last ma function compullsary call karvu function 1 var banavo aane khali eene  biji var jo vaparavu hoi tyre khali eene call karvanu
+        function intro(username ='pro',Field='devoops',Years='21'){
+         
+            console.log(`hy my name is ${username}`);
+            console.log(`i am a ${Field}`);
+            console.log(`years old ${Years}`);
+
+        }
+         intro();//call
+       intro('het','software eng',23);
+       intro('parm','mech eng',29);
+
+     
+
+       //function return karavo tyre eene console log krvu return karavya pchi ane varibale ma eene store karvu
+
+       const discount=(price,discountPercentage)=>{
+        let discount=(price*discountPercentage)/100;
+        return price-discount;
+       };
+
+       let b=discount(500,10);
+       console.log(b);
+
+
+       //other example
+
+        // types of function
+  // (1) arrow function
+  // (2) normal function
+
+  // create
+  // take nothing, return nothing
+  function test() {
+    console.log("Hello");
+  }
+
+  // call
+  test();
+
+  // take nothing, return something
+
+  const demo = () => {
+    let state = 50;
+    let state1 = 100;
+    return state + state1;
+  };
+
+  let a = demo();
+  console.log(a);
+
+  // take something, return nothing
+  function Multiply(a, b) {
+    console.log(a * b);
+  }
+
+  Multiply(5, 6);
+    </script>
+</body>
+</html>

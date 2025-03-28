@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Tag (Unpaired Tag, Paired Tag), Content, Element(Block Level, Inline Level) -->
+
+    <h1  class="head1"id="head">This is Website Title</h1>
+
+    <p class="para">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. In animi rerum
+      quam sequi, veritatis aliquid consequatur id aut voluptatem similique
+      voluptas provident nemo, quas debitis obcaecati esse culpa dolorum vero
+      sint, explicabo molestiae qui labore! Ex, officiis. Numquam, blanditiis,
+      error quasi amet reiciendis quam vel ut nemo officiis illum recusandae.
+    </p>
+
+    <p id="para">
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae, tempore.
+    </p>
+
+    <h1>Heading</h1>
+
+    <ul id="list">
+      <li><a href="">Home</a></li>
+      <li><a href="">Home</a></li>
+      <li><a href="">Home</a></li>
+      <li><a href="">Home</a></li>
+      <li><a href="">Home</a></li>
+    </ul>
+
+    <span class="para"
+      >Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur,
+      labore!</span
+    >
+
+    <div id="demo">'
+      <h1>hyy</h1>
+    </div>
+  </body>
+</html>
+
+<script>
+//   DOM - Document(HTML) Object(Elements) Modal(tree Structure)
+//   Manipulation
+
+//   Selecting Elements
+
+  document.getElementsByTagName     //Array aape
+  document.getElementsByClassName    //Array aape
+  document.getElementById  //Single ele aape    //Element aape
+  document.querySelector  //Single ele aape   //Element aape
+  document.querySelectorAll        //Array aape
+
+  let h1 = document.getElementsByTagName("h1");
+  console.log(h1[1]);
+
+  let para = document.getElementsByClassName("para")[1];
+  console.log(para);
+
+  let list = document.getElementById("list");
+  console.log(list);
+
+  let h = document.querySelector("#list");
+  console.log(h);
+
+  let t = document.querySelectorAll("#list")[0];
+  console.log(t);
+
+//   Change HTML Content
+
+  //innerHTML
+  //innerText
+  //textContent
+
+  let head = document.getElementById("head");
+  head.textContent = "Hello";
+
+  let demo = document.getElementById("demo");
+
+  demo.innerHTML = "<h2>Hello Universe !!!!</h2>";
+
+  let par = document.getElementsByClassName("para")[0];
+  para.style.color = "red";
+  para.style.backgroundColor = "tan";
+  para.style.fontSize = "50px";
+
+
+  // <!-- getattribute setattribute remove attribute -->
+
+let z=document.getElementById("head");
+console.log(z.getAttribute("id"));
+
+//setattribute
+
+let p=document.getElementById("para");
+p.setAttribute("class","para");
+
+p.removeAttribute("class");
+
+
+</script>
+</body>
+</html>

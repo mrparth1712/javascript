@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>array</title>
+</head>
+<body>
+    <script>                                                //array ma object nakhyo  and function bhi nakhi sako
+        let fruitsCollections=["apple","banana","cherry",   {name:'parth',
+            study:'b-tech',
+            age:'23'}];
+        console.log(fruitsCollections[2] ='watermallon');//cherry ni jagyae watermallon nakhyu
+        console.log(fruitsCollections[4]='chiku'+'is a fine') ;//1 index add kairi
+        fruitsCollections[fruitsCollections.length]='biu';//length thi pan add thay
+        console.log(fruitsCollections);
+
+
+
+        //array method
+        //push method add last element
+
+        let item=[11,22,33,44,55];
+        item.push(66,89,"parth");
+        item.push(77);
+        console.log(item);
+
+        //pop method remove last element
+        let items=[11,33,22,70]
+        items.pop();
+        console.log(items);
+
+        //shift method start thi element delete karva mate
+        let arr_1=[2,4,6,8,10]
+        arr_1.shift();
+        console.log(arr_1);
+    
+        //unshift method start thi  element add karva 
+        let arr_2=[4,5,6,8]
+        arr_2.unshift(5,8);
+        console.log(arr_2);
+
+        //concat 2 arrays add
+        let arr_3=['lion','elephent','chitha','cat']
+        let arr_4=['parth','het']
+        let mergedarray=arr_3.concat(arr_4);
+        console.log(mergedarray);
+
+        //indexof index find kre number ni
+        let aa=[11,22,33,44,99,90,98,97]
+        let i=aa.indexOf(90);
+
+        console.log(i);
+
+
+        //reverse string aakhi uulti kari nakhe
+
+    let animals=['lion','cat','horse']
+    animals.reverse();
+    console.log(animals);
+        
+
+        //sort line ma gothvine dese abcd mujab
+
+        let alphaBet=['l','a','x','z']
+        alphaBet.sort();
+        console.log(alphaBet);
+
+        //slice 
+        let numbers = [2, 3, 5, 7, 11, 13, 17];
+
+// create another array by slicing numbers from index 3 to 5
+let newArray = numbers.slice(3, 6);
+console.log(newArray);
+
+//splice
+
+
+
+
+
+
+//multidimentional array
+    
+        let arryas=[['parth',75],['het',90]]
+        console.log(arryas[0][0]);
+
+        const ticTacToe=[
+            ['X',null,null],
+            [null,null,'O'],
+            ['O',null,'X'],
+        ]
+        console.log(ticTacToe[0][2]);
+
+    </script>
+</body>
+</html>

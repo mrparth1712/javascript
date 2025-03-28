@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+    <style>
+        .para {
+          color: red;
+          background-color: tan;
+          border: 2px dashed black;
+          padding: 20px;
+          font-size: 20px;
+        }
+        .p {
+          color: darkblue;
+          background-color: lightcoral;
+          padding: 25px;
+          font-family: cursive;
+          font-size: 25px;
+        }
+        .pp {
+          border: 5px double darkred;
+        }
+      </style>
+</head>
+<body>
+    <p id="paras">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla maxime
+        explicabo dolor dicta adipisci soluta?
+      </p>
+      <p id="paragraph" class="pp">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus,
+        deleniti?
+      </p>
+      <button onmouseleave="Print()">Click Me</button>
+    <button onclick="ParaCSS()">Para CSS</button>
+    <button onclick="ParaCSSRemove()">Remove CSS</button>
+    <button onclick="toggleCSS()">Toggle CSS</button>
+    <script>
+        //mouse event keboard event form event
+
+
+        //button uper event
+       // events - (1) Mouse Events - click, dblclick, contextmenu, mouseover, mouseleave (2) Keyboard Events - keypress, keydown, keyup
+
+  // create
+  function Print() {
+    console.log("Hello ... !!!");
+  }
+
+
+  // className
+
+  //   function ParaCSS() {
+  //     document.getElementById("paragraph").className = "p pp";
+  //   }
+
+  // classList - add, remove, toggle, contains, item[index]
+
+  const ParaCSS = () => {
+    // document.getElementById("paragraph").classList = "p pp";
+    document.getElementById("paragraph").classList.add("p");
+  };
+
+  const ParaCSSRemove = () => {
+    document.getElementById("paragraph").classList.remove("p");
+  };
+
+  const toggleCSS = () => {
+    document.getElementById("paragraph").classList.toggle("p");
+    let h = document.getElementById("paragraph").classList.contains("pp");
+    console.log(h);
+  };
+    </script>
+</body>
+</html>

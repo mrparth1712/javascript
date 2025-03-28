@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object</title>
+</head>
+<body>
+    <script>
+        //object ni aandar function bhi nakhi sako
+        let intro={
+            firstname:"parth",
+            lastname:"bajariya",
+            study:"b-tech",
+            city:"rajkot",
+
+        };
+        console.log(intro["first"+"name"]);//first method
+        console.log(intro.firstname);//second method
+
+       //hji kaik add karvu che to eena mate
+      intro.hobby ="snooker";
+      console.log(intro);
+     
+
+      //object in object
+
+      let user2={
+        firstname:"het",
+        lastname:"doshi",
+        address:{
+            city:"pune",
+            pincode:335533,
+            moreDetails:{
+                population:987678596,
+                area:"square 787",
+               
+            },
+          
+        },
+        salary:function(){
+                    return 25000;
+                },
+      };
+      console.log(user2);
+      console.log(user2.salary());
+     
+     
+
+
+      //object.freeze method()not add not change not modify in object
+    //   Object.freeze(user2);
+
+
+
+
+      //object.seal()not add and not delele only create object modify allow
+    //   Object.seal(user2);
+
+
+
+    //second method create object
+
+    let person=new Object();
+    person.firstname='ram';
+    person.lastname='kumar';
+    console.log(person);
+
+      
+
+            
+    </script>
+</body>
+</html>

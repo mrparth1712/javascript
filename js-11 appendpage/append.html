@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>only page create javascript</title>
+</head>
+<body>
+    <style>
+        #card {
+          border: 2px solid black;
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 400px;
+        }
+      </style>
+    </head>
+    <body id="body">
+      <div id="demo"></div>
+  
+      <div id="card"></div>
+
+      <div id="spans"></div>
+
+      <div id="container"></div>
+    </body>
+  
+  </html>
+  
+  <script>
+    // createElement
+  
+    let h1 = document.createElement("h1");
+    console.log(h1);
+  
+    // createTextNode
+  
+    let content = document.createTextNode("Heading");
+     // appendChild
+  
+     h1.appendChild(content);
+    let demo = document.getElementById("demo");
+    console.log(demo);
+    demo.appendChild(h1);
+    
+
+    //create element
+    let span=document.createElement("span");
+    console.log(span);
+    //create textnode
+    let  cont =document.createTextNode("hello");
+    span.appendChild(cont);
+    //append child
+    let spans=document.getElementById("spans");
+    console.log("spans");
+    spans.appendChild(cont);
+  
+    // console.log(content);
+  
+    // createComment
+  
+    let comment = document.createComment("This is Comment");
+    console.log(comment);
+  
+   
+
+  
+   
+  
+    // to create card
+  
+    let card = document.getElementById("card");
+  
+    let img = document.createElement("img");
+    img.src =
+      "https://media.istockphoto.com/id/1389603578/photo/laptop-blank-screen-on-wood-table-with-blurred-coffee-shop-cafe-interior-background-and.jpg?s=612x612&w=0&k=20&c=bPf3XxUZJZ6HRw7BE75ur1wBMCm_r4QAr-_lajERIyU=";
+    img.alt = "laptop";
+    img.style.width = "100%";
+  
+    card.appendChild(img);
+  
+    let h2 = document.createElement("h2");
+    h2.innerHTML = "This is Heading";
+    // h2.style.textAlign = "center";
+  
+    card.appendChild(h2);
+  
+    let p = document.createElement("p");
+    p.innerHTML =
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum fuga enim impedit praesentium eos? Delectus voluptas dolores fugiat totam explicabo non iusto quibusdam perspiciatis optio adipisci nam, impedit, id eveniet doloribus commodi expedita esse eius. Exercitationem sit temporibus expedita pariatur sint impedit perferendis enim tenetur, vitae nulla, dicta ducimus nihil?";
+    // p.style.textAlign = "center";
+  
+    card.appendChild(p);
+  
+    let btn = document.createElement("button");
+    btn.innerHTML = "Click Me";
+    btn.style.border = "none";
+    btn.style.padding = "10px 15px";
+    btn.style.color = "darkred";
+    btn.style.backgroundColor = "lightblue";
+    btn.style.borderRadius = "10px";
+    // btn.style.textAlign = "center"
+  
+    card.appendChild(btn);
+
+
+
+
+    //using forloop
+
+    for(let i=1;i<=50;i++){
+      let newimg=document.createElement('img')
+      newimg.src=`https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0rx1MtyV1MPDOwQ4hWkQWnaMwvJOp2uHqxw&s`;
+      container.append(newimg)
+    }
+  </script>
+</body>
+</html>

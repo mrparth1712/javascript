@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for each map  filter</title>
+</head>
+<body>
+    <script>
+
+        //foreach eek sathe badho data eek sathe jyare print karvo hoi tyre for each ne map no use thai ane bey vche diffrenet ee che ke map che ee return value ma array aape aaen for each return ma undefined aape
+        let fruits=['banana','apple','peach','mango']
+        fruits.forEach(function(fruit){
+            console.log(fruit);
+        });
+
+
+        //using arrow function
+       fruits.forEach((fruit)=>{
+        console.log(fruit);
+       });
+
+
+       //array sathe
+       let people=[
+        {
+            name:"parth",
+            std:10,
+        },
+        {
+            name:"het",
+            std:10,
+        }
+       ];
+    people.forEach((element)=>
+        console.log("my name is"+element.name)
+    );
+
+//         //$ sathe
+//     let peoples=[
+//         {
+//             name:"parth",
+//             std:10,
+//         },
+//         {
+//             name:"het",
+//             std:10,
+//         }
+//        ];
+//    peoples.forEach((elements)=>
+//         console.log (my std is ${elements.std})
+//    );error aave che sir ne puchvu
+   
+        //map most use
+       let months=['january','february','march','aprial']
+       months.map(function(month){
+        console.log(month)
+       });
+
+
+       //arrow function
+         months.map((month)=>{
+        console.log(month);
+        return month.toUpperCase()
+       });
+
+
+       //return jova mate
+
+       const matches=['rcb','punjab','mi','srh']
+       console.log(
+       matches.map((match,index,arr)=>{
+        console.log(index,match,arr);
+        return match.toUpperCase()
+       }
+       )
+       )
+
+       //filter most use
+       let aa=[1,2,3,4,5,6,7,8,9,10];
+
+       aa.filter((ele,index)=>{
+        console.log(ele%2===0)
+       });
+
+      //example
+       let filtermonth =['january is a','february is a','mar','apr','may'];
+       filtermonth.filter((month)=>{
+      
+       console.log( month.length >=5);
+       
+       })
+
+       let filtersmonth=['jan','feb','mar','apr','december','dm'];
+       filtersmonth.filter((month)=>{
+         console.log(month.includes('m'))
+       })
+      
+       //example
+       let students=[
+        {
+            name:'parth',
+            age:15,
+        },
+        {
+            name:'ayush',
+            age:23,
+        },
+        {
+            name:'vraj',
+            age:30,
+        },
+    ]
+    students.filter((check)=>{
+        console.log(check.age<=18);
+    });
+
+
+   //reduce
+
+  const nums=[1,1,1,1,1,1]
+
+  nums.reduce((accumulator)=>{
+    console.log(accumulator);
+  });
+    </script>
+</body>  
+</html>
