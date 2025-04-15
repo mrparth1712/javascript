@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form data store local storage</title>
+</head>
+<body>
+    <!-- body ma form banavyu -->
+    <form id="form">
+        <input type="text" placeholder="Enter Name" id="name"/>
+        <br><br>
+        <input type="email" placeholder="Enter Email" id ="email"/>
+        <br><br>
+        <button type="submit">submit</button>
+    </form>
+    <script>
+        //target kairu 3eey field ne
+        let form=document.getElementById("form");
+        let name=document.getElementById("name");
+        let email=document.getElementById("email");
+
+        //jayre submit ma click karo tyre j form no data local storage ma jai eetle form ni click uper function aapvu baki nai kam kare
+        form.addEventListener("submit",(event)=>{
+            //aa event preventdefault chene form no data refresh thai ne direct vai no jai eetle compulsary lakhvu aane uper arrow function ma event bhi compulsary lakhvu
+            event.preventDefault();
+            let obj={
+                //value etle aapyu ke name ni value toj lese value aapyu haise to
+                name:name.value,
+                email:email.value
+            };
+            //obj ne array ma store karavi didho
+            let arr=
+            JSON.parse(localStorage.getItem("DATA"))||[];//aa condition eetle aapi ke jayre arr khali hse tyre navo data eema store thai jse
+            //push method je navo data aavse eene add karse last ma
+            arr.push(obj);
+
+            //obj or arr of object store karo tayre tene compuulsary stringify ma badalvu pade
+            localStorage.setItem("DATA",JSON.stringify(arr));
+            //form ne reset karva mate
+            event.target.reset();
+            
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>local storage practice</title>
+</head>
+<body>
+    <script>
+        //local storage ma jayre object and array of object kro ne tayre khas dhyan rakhvu setdata karo eetle json.stringfy aane get data console ma kro tyre json.parse compulsary lakhvu
+        let num=[1,2,3,4,,5]
+        localStorage.setItem("num",num);
+
+
+        //obj store
+
+        let name={
+            name:"parth",
+            std:12,
+            fathername:"samirbhai"
+        };
+        localStorage.setItem("detail",JSON.stringify(name));
+
+       
+        console.log(JSON.stringify(name));
+
+
+        //console ma print karava mate
+        let data=JSON.parse(localStorage.getItem("detail"));
+        console.log(data);
+
+
+        //arr of object
+        let details=[
+        {
+            moviename:"pushpa2",
+            release:2025,
+
+            moviename:"1920london",
+            release:"2023"
+        }
+        
+        ];
+        localStorage.setItem("movie",details);//stringify vagar
+
+        localStorage.setItem("movie",JSON.stringify(details));
+
+
+       
+        
+    </script>
+</body>
+</html>

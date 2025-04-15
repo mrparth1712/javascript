@@ -15,13 +15,49 @@
         let registration=document.getElementsByClassName("registration");
 
         //create element
-        let form=document.createElement("form");
-        form.inputtype="text",name="username";
-        form.inputtype="email";
-        form.inputtype="number";
-        form.inputtype="password";
-        //append child
-       registration.appendChild(form);
+        let form = document.createElement("form");
+
+// Create input fields
+let nameLabel = document.createElement("label");
+nameLabel.innerHTML = "Name: ";
+let nameInput = document.createElement("input");
+nameInput.setAttribute("type", "text");
+nameInput.setAttribute("name", "name");
+nameInput.setAttribute("required", "true");
+
+let emailLabel = document.createElement("label");
+emailLabel.innerHTML = "Email: ";
+let emailInput = document.createElement("input");
+emailInput.setAttribute("type", "email");
+emailInput.setAttribute("name", "email");
+emailInput.setAttribute("required", "true");
+
+let passwordLabel = document.createElement("label");
+passwordLabel.innerHTML = "Password: ";
+let passwordInput = document.createElement("input");
+passwordInput.setAttribute("type", "password");
+passwordInput.setAttribute("name", "password");
+passwordInput.setAttribute("required", "true");
+
+// Create submit button
+let submitButton = document.createElement("button");
+submitButton.setAttribute("type", "submit");
+submitButton.innerHTML = "Submit";
+
+// Append elements to the form
+form.appendChild(nameLabel);
+form.appendChild(nameInput);
+form.appendChild(document.createElement("br"));
+form.appendChild(emailLabel);
+form.appendChild(emailInput);
+form.appendChild(document.createElement("br"));
+form.appendChild(passwordLabel);
+form.appendChild(passwordInput);
+form.appendChild(document.createElement("br"));
+form.appendChild(submitButton);
+
+// Append form to the body
+document.body.appendChild(form);
 
     </script>
 </body>

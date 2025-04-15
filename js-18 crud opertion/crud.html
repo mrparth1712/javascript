@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crud operation edit  and delete perfrorm</title>
+</head>
+
+<body>
+    <!-- form banavyu -->
+    <form id="form">
+        <input type="text" placeholder="enter the name" id="name" required/>
+        <br><br>
+        <input type="email" placeholder="enter the email" id="email" required/>
+        <br><br>
+        <input type="password" placeholder="enter the password" id="password" required/>
+        <br><br>
+        <input type="submit">submit</button>
+    </form>
+    <br>
+    <!-- table banavvyu khali te table row means uper na heading banava khalii -->
+     <table border="2" cellspacing="0" cellpadding="10">
+        <thead>
+            <tr>
+                <tr>Sr No</tr>
+                <tr>name</tr>
+                <tr>Email</tr>
+                <tr>Password</tr>
+                <tr>Actions</tr>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+     </table>
+     <script>
+        //badha ne target karvana pela je upper form ne tabale ma banavyu hoi ee
+        let form=document.getElementById("form");
+        let name=document.getElementById("name");
+        let email=document.getElementById("email");
+        let pass=document.getElementById("password");
+        let tableBody=document.getElementById("tableBody");
+
+        //submit event uper aa function banavu form ni event uper kam nai kare
+        form.addEventListener("submit",(event)=>{
+             //aa event preventdefault chene form no data refresh thai ne direct vai no jai eetle compulsary lakhvu aane uper arrow function ma event bhi compulsary lakhvu
+            event.preventDefault();
+
+            let obj={
+                name:name.value,
+                email:email.value,
+                pass:pass.value
+            };
+
+            let arr=
+            JSON.parse(localStorage.getItem("User_Data"))||[];//aa condition eetle aapi ke jayre arr khali hse tyre navo data eema store thai jse
+              //push method je navo data aavse eene add karse last ma
+              arr.push(obj);
+
+              
+            //obj or arr of object store karo tayre tene compuulsary stringify ma badalvu pade
+            localStorage.setItem("DATA",JSON.stringify(arr));
+
+            //data display karava
+            displayData();
+
+             //form ne reset karva mate
+             event.target.reset();
+        });
+
+        //aahithi no samjanu sir ne puchvu
+
+        const displayData = () => {
+    let updatedData = JSON.parse(localStorage.getItem("User_Data"));
+
+    let tr = "";
+
+
+    //aama +chene ee index ni value 0 thi aapse aane jo + nai aapo to tmne je current data upate karo cho eej index print karse aane `` aa symbol aapo tyre eene print krva mate hamesha $ aapvu padse and map mate aandar 2 parameter aapva padse
+    updatedData.map((item, index) => {
+      tr += `
+      <tr>
+          <td>${index + 1}</td>  
+          <td>${item.name}</td>  
+          <td>${item.email}</td>  
+          <td>${item.pass}</td>  
+          <td><button>Edit</button><button onclick="handleDelete(${index})">Delete</button></td>  
+          </tr>
+          `;
+    });
+
+    tableBody.innerHTML = tr;
+  };
+
+//   const handleDelete = (index) => {
+//     // console.log(index);
+//     let updatedData = JSON.parse(localStorage.getItem("User_Data"));
+//     updatedData.splice(index, 1);
+//     localStorage.setItem("User_Data", JSON.stringify(updatedData));
+//     displayData();
+//   };
+
+//   displayData();
+
+     </script>
+</body>
+</html>

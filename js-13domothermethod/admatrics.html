@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #test,
+      #demo {
+        border: 2px solid;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test">
+      <h2>This is H2 Tag</h2>
+
+      <p>Lorem ipsum dolor sit .</p>
+    </div>
+
+    <!--  -->
+
+    <div id="demo">
+      <!-- <h1></h1>
+      <h2></h2>
+      <p></p>
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul> -->
+    </div>
+    <!--  -->
+
+    <table border="3" cellspacing="0" cellpadding="10" width="50%">
+      <thead>
+        <tr>
+          <th>Sr No</th>
+          <th>Name</th>
+          <th>City</th>
+          <th>Age</th>
+          <th>Post</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableData"></tbody>
+    </table>
+  </body>
+</html>
+<script>
+  // appendChild
+
+  // children
+  // insertBefore
+
+  // insertAdjacentElement
+  // insertAdjacentHTMl
+  // insertAdjacentText
+
+  // let h1 = document.createElement("h1");
+  // h1.innerHTML = "This is H1 tag";
+
+  // let test = document.getElementById("test");
+  // test.appendChild(h1);
+  // console.log(test);
+
+  // test.insertBefore(h1, test.children[2]);
+
+  // console.log(test.children);
+
+  // position - beforebegin, afterbegin, beforeend, afterend
+  // test.insertAdjacentElement("position",element);
+  // test.insertAdjacentElement("afterend", h1);
+
+  // let span = "<span>This is Span Tag</span>";
+  // test.insertAdjacentHTML("afterend", span);
+
+  // let text = "<h1>This is Just Text</h1>";
+  // test.insertAdjacentText("beforebegin", text);
+
+  //
+
+  let demo = document.getElementById("demo");
+
+  let data = `
+    <h1>Heading 1</h1>
+    <h2>Heading 2</h2>
+    <p>This is Paragraph Tag</p>
+    <ul>
+      <li>Home</li>  
+      <li>About</li>  
+      <li>Blog</li>  
+      <li>Service</li>  
+      <li>Contact</li>  
+    </ul>
+  `;
+
+  demo.innerHTML = data;
+
+  let tableData = document.getElementById("tableData");
+
+  let tr = `
+      <tr>
+        <td>1</td>
+        <td>Raj</td>
+        <td>20</td>
+        <td>Pune</td>
+        <td>Architect</td>
+        <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Pushpraj</td>
+          <td>22</td>
+          <td>Kolkata</td>
+          <td>Manager</td>
+          <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+    `;
+
+  tableData.innerHTML = tr;
+  // template literals
+
+  // let name = "Raj";
+  // let age = 25;
+  // let city = "Ahmedabad";
+
+  // console.log(
+  //   "My Name is " + name + " My Age is " + age + " I am Live in " + city
+  // );
+
+  // console.log(My Name is ${name} My Age is ${age} i am Live in ${city});
+
+  // padStart
+  let b = "Raj";
+
+  console.log(b.padStart(6, "L"));
+
+  // padEnd
+  console.log(b.padEnd(6, "L"));
+
+  let num = 281;
+
+  console.log(num.toString().padStart(6, "0"));
+  console.log(num.toString().padEnd(6, "0"));
+</script>

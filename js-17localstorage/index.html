@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="btn">Remove Item</button>
+  </body>
+</html>
+
+
+<script>
+  // 5 MB
+  // localStorage
+  // setItem()
+  // getItem()
+  // removeItem()
+  //session storage ma aamj same method aave but eema local ni jagyae session lakhvanu
+
+  let name = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+  localStorage.setItem("DATA", name);
+
+//   let a = localStorage.getItem("DATA");
+//   console.log(a);
+
+  document.getElementById("btn").addEventListener("click", () => {
+    localStorage.removeItem("DATA");
+  });
+
+  let obj = {
+    name: "Baby John",
+    age: 12,
+    city: "Mumbai"
+  };
+  // console.log(obj);
+
+  // console.log(JSON.stringify(obj));
+
+  localStorage.setItem("ObjStore", JSON.stringify(obj));
+
+  let data = JSON.parse(localStorage.getItem("ObjStore"));
+  console.log(data);
+
+  // JSON - JavaScript Object Notation
+  // JSON.stringify()
+  // JSON.parse()
+
+  let arrObj = [
+    { movie: "Chhava", year: 2025 },
+    { movie: "Pushpa 2", year: 2025 }
+  ];
+
+  localStorage.setItem("arrObj", JSON.stringify(arrObj));
+
+  let b = JSON.parse(localStorage.getItem("arrObj"));
+  console.log(b[0].movie);
+  console.log(b[0].year);
+  console.log(b[1].movie);
+  console.log(b[1].year);
+
+  // sessionStorage
+</script>

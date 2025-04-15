@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>setinterval settimeout</title>
+  </head>
+  <body>
+    <div id="demo" style="border: 2px solid"></div>
+  </body>
+</html>
+<script>
+//   setInterval()
+
+  let i = 0;
+
+  let time = setInterval(() => {
+    ++i;
+    console.log(i);
+  }, 2000);
+
+//   clearInterval()
+
+//   setTimeout()
+
+  setTimeout(() => {
+    let demo = document.getElementById("demo");
+    demo.innerHTML = `
+      <img src="https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=" alt="image" />
+      <h2>This is H2 Tag</h2>
+      <p>This is Para</p>
+      <button>Read More</button>
+    `;
+  }, 1000);
+</script>
