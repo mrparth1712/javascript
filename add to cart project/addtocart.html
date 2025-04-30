@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>add to cart project</title>
+    <style>
+        img{
+            width: 200px;
+        }
+        body {
+          font-family: Arial, sans-serif;
+          margin: 20px;
+          background: #f9f9f9;
+        }
+    
+        h2 {
+          text-align: center;
+        }
+    
+        #products, #cart {
+          max-width: 1000px;
+          margin: 20px auto;
+        }
+    
+        .product-container {
+          display: flex;
+          align-items: center;
+          margin-bottom: 15px;
+          padding: 15px;
+          background: #fff;
+          border: 1px solid #ddd;
+          gap: 20px;
+        }
+    
+        .product-container img {
+          width: 100px;
+          border-radius: 8px;
+        }
+    
+        .product-container button {
+          margin-left: auto;
+          padding: 8px 12px;
+          background: #28a745;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+    
+        .cart-table {
+          width: 100%;
+          border-collapse: collapse;
+          background: #fff;
+        }
+    
+        .cart-table th, .cart-table td {
+          padding: 15px;
+          border-bottom: 1px solid #ddd;
+          text-align: center;
+        }
+    
+        .cart-table img {
+          width: 60px;
+          border-radius: 8px;
+        }
+    
+        .qty-controls {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 8px;
+        }
+    
+        .qty-controls button {
+          padding: 4px 8px;
+          border: 1px solid #ccc;
+          background: #f0f0f0;
+          cursor: pointer;
+        }
+    
+        .summary {
+          text-align: right;
+          margin-top: 20px;
+        }
+    
+        .summary h3 {
+          margin-bottom: 10px;
+        }
+    
+        #clearCart {
+          margin-top: 10px;
+          padding: 10px 20px;
+          background: #dc3545;
+          color: white;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+      </style>
+</head>
+
+<body>
+    <!-- first add to cart project ma kevu  hoi ke pela eek array of object bane pchi eenu ui bane product nu pchi ee ui banyu hoi eema thi eek nvo array of object made je product add kari hoi ee aane pchi pchu arrray of object banavanu aaane pchi ene bija page ma show karvanu bas aa hoi add to cart ma -->
+
+    <!-- eek new dicv banavyu aane eema product name ni id lidhi  -->
+    <div id="products">
+        <div>
+           <h2>Our Products</h2>
+
+           <!-- product show thase -->
+           <div id="product_list"></div> 
+        </div>
+
+
+        <!-- eek cart banavyu aane eema eek button banavyu -->
+        <div id="cart">
+            <h2>Cart</h2>
+            <!-- button uper click thai eetle show thai eena mate product_show banavyu -->
+            <ul id="product_show"></ul>
+            <h3 id="price_show"></h3>
+            <button id="clearCart">Clear Cart</button>
+        </div>
+    </div>
+    <script>
+        //niche je cart items ma data push thai che eena mate aa banavyu
+
+        //aane local storage mate pan banavyyu
+          let cartItems = JSON.parse(localStorage.getItem("DATA")) || [];
+
+        //total price mate banavyu che aa jem product add karo aam price y aave ne eena mate
+         //aane local storage mate pan banavyyu
+          let total_Price = localStorage.getItem("Price") || 0;
+
+
+        //array of object banavyo products no
+        let products=[
+            {
+           productsImage:"https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?cs=srgb&dl=pexels-madebymath-90946.jpg&fm=jpg",
+           productName:"product 1",
+           productPrice:10
+            },
+            {
+             productsImage:"https://thumbs.dreamstime.com/b/set-care-beauty-products-skin-29817248.jpg",
+           productName:"product 2",
+           productPrice:20
+            },
+            {
+                productsImage:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSnb12Il0-DFWm7bhtOpCqgi4sgfcs2kZLew&s",
+           productName:"product 3",
+           productPrice:40
+            },
+        ];
+        
+
+        //je uper array of object banavyo che eema products uper for each chalavi eetle badho data made
+        products.forEach((product,index)=>{
+            const productContainer=document.createElement("div");
+
+            productContainer.classList.add("product-container");
+
+            //card create kairu
+            productContainer.innerHTML=`
+            <img src="${product.productsImage}"alt="product_image"/>
+            <h3>${product.productName}</h3>
+            <button class="add_to_cart">Add To Cart$${product.productPrice}</button>
+        `;
+        //div ne pass kairu product list ma toj show thase products
+        document.getElementById("product_list").appendChild(productContainer);
+
+
+
+        //uper je button banavyu che eene target kairu
+        let addtoCartButtons=document.querySelectorAll(".add_to_cart");
+
+        //jayre button uper click thai tayre data baju ma show thavo joiye aane indexx pass kari darek button aapi dese
+        //add event listener aipu aane cartItem ma push karavi didho cart ne
+        addtoCartButtons[index].addEventListener("click",()=>{
+            cartItems.push({
+                image:product.productsImage,
+                name:product.productName,
+                price:product.productPrice
+
+            });
+            total_Price +=product.productPrice;
+            
+
+            //local storage ma data store karava mate
+      localStorage.setItem("DATA", JSON.stringify(cartItems));
+      localStorage.setItem("Price", total_Price);
+
+           
+
+            //function call data push thase 
+            ShowCart();
+
+        });
+    });
+
+
+    //hve aapdo data baju ma show thai eena mate kam kariye chiye
+
+   const ShowCart=()=>{
+    let price=document.getElementById("price_show");
+    //"" eetla mate aaipu ke navo data aave eetle aagad vado data blank kari nakhse
+    document.getElementById("product_show").innerHTML="";
+
+    //je array aayo che eene pcho side na page maa show karava mate aa kam karsu
+    cartItems.forEach((cart,index)=>{
+        let li=document.createElement("li");
+        li.innerHTML=`
+        <img src="${cart.image}"alt="cart_img"/>
+        <h3>${cart.name}-$${cart.price}</h3>
+        <button class="delete_item"data-index="${index}">Delete</button>
+        `;
+
+        //hve product show ni aandar li ne pass kari didhu
+        document.getElementById("product_show").appendChild(li);
+    });
+
+    price.innerText = `Total $${total_Price}`;
+
+
+    //delete karva mate items ne
+    let deleteButtons = document.querySelectorAll(".delete_item");
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", (e) => {
+            let itemIndex = e.target.getAttribute("data-index");
+
+            // Update price and cartItems array
+            total_Price -= cartItems[itemIndex].price;
+            cartItems.splice(itemIndex, 1);
+
+            // Update localStorage
+            localStorage.setItem("DATA", JSON.stringify(cartItems));
+            localStorage.setItem("Price", total_Price);
+
+            // Refresh UI
+            ShowCart();
+        });
+    });
+};
+
+
+   //clear data mate kairu aa function
+   document.getElementById("clearCart").addEventListener("click",()=>{
+    cartItems=[];
+    total_Price=0;
+    ShowCart();
+   });
+
+   ShowCart();
+    </script>
+</body>
+</html>

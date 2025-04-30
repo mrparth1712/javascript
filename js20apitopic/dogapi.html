@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Api fetch</title>
+</head>
+<body>
+    <!-- pela button banavyu pchi eema peli image change karo pchi aava mandse images eetle button ni click event uper function ne chalavyu -->
+    <button onclick="changeDogimg()">change image</button>
+    <img src="https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1xw:0.74975xh;center,top&resize=1200:*" id="dog_img" alt="image">
+   <!-- uper image lidhi karan ke peli var aapde image nakhvi padse -->
+    <script>
+        //function banavyu arrow function pchi api lidhi link aane pchi pela then ma tmne response madse bija then ma api no response madse aane catch ma error madse jo api fetch nai thai to ok
+        const changeDogimg=()=>{
+            fetch("https://dog.ceo/api/breeds/image/random")
+            .then((res)=>res.json())
+            .then((Data)=>{
+                console.log(Data.message);
+                document.getElementById("dog_img")
+                .src=Data.message;
+            })
+            .catch((err)=>console.log(err));
+        };
+       
+    </script>
+</body>
+</html>

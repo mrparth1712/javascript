@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create bank account using oops </title>
+</head>
+<body>
+    <h2>Create Account Form</h2>
+    <form id="accountForm">
+        <input type="text" placeholder="Enter Customer Name" id="customerName"/>
+        <br><br>
+        <input
+        type="number"
+        placeholder="Enter Initial Balance"
+        id="initialBalance"
+      />
+      <br><br>
+      <button type="submit">Create Account</button>
+    </form>
+    <script>
+        //bank account
+
+        //class banavyo aane constructor banavyu aane account number automatic create karse karan ke math random vaparyu che
+        class BankAccount{
+            constructor(customerName,balance){
+                this.customerName=customerName;
+                this.accountNumber=Math.floor(Math.random()*100000000000);
+                this.balance=balance;
+            }
+            //prototype method banavi deposit ma + thase aane withhdraw ma - thase
+            deposit(amount){
+                this.balance=this.balance+amount;
+            }
+            withdraw(amount){
+                this.balance=this.balance-amount;
+            }
+        }
+
+        //badha ne target kairu
+        let accountForm=document.getElementById("accountForm");
+        let customerName = document.getElementById("customerName");
+  let initialBalance = document.getElementById("initialBalance");
+
+  //local storage ma store karavyu
+  let account = JSON.parse(localStorage.getItem("accounts")) || [];
+
+  //array banavyoo badho data array ma jase 1 1 object store karavo hard pade
+  let accounts = [];
+
+  //form ni submit uper click karvathi thase 
+  accountForm.addEventListener("submit",(event)=>{
+    //form ne reset kari nakhse eek data naikha pchi
+    event.preventDefault();
+
+    //new object banavyu
+    let account=new BankAccount(customerName.value,+initialBalance.value);
+    // account ne push karavi didhu
+    accounts.push(account);
+
+    //console ma print karavyu
+    console.log(accounts);
+
+    //save to local storage array che eetle stringify kairu
+    localStorage.setItem("accounts", JSON.stringify(accounts));
+
+
+    //form ma eek value nakhya pchi reset thai jai
+    event.target.reset();
+  });
+
+    </script>
+</body>
+</html>

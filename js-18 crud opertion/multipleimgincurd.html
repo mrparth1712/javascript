@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>multiple image add crud operation</title>
+   
+  </head>
+  <body>
+    <form id="form">
+      <input type="text" placeholder="Enter Name" id="name" /><br /><br />
+      <input type="email" placeholder="Enter Email" id="email" /><br /><br />
+      <input
+        type="password"
+        placeholder="Enter Password"
+        id="password"
+      /><br /><br />
+      <input type="file" id="files" multiple />
+      <br /><br />
+      <button type="submit" id="btn">Submit</button>
+    </form>
+
+    <br /><br />
+    <table border="1" cellspacing="0" cellpadding="10">
+      <thead>
+        <tr>
+          <th>Sr No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Images</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableData"></tbody>
+    </table>
+  </body>
+</html>
+<script>
+  //multiple image mate pela to files levu padse pchi result ane readers mate eek array banavo padse jethi arrray multiple image store kari sake pchi eek condition mukvi padse ke jo file images ni length images length jevdi hoi to data store thai jai ane fileurls uper map method chalavi padse aane londead ane readers meethod image add karva mate chalavi padse aatllu karvanu multiple image add karva.
+  let form = document.getElementById("form");
+  let name = document.getElementById("name");
+  let email = document.getElementById("email");
+  let password = document.getElementById("password");
+  let filesInput = document.getElementById("files");
+  let tableData = document.getElementById("tableData");
+  let btn = document.getElementById("btn");
+  let editIndex = null;
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    let filesImages = Array.from(filesInput.files);
+
+    let readers = [];
+    let results = [];
+
+    if (filesImages.length > 0) {
+      filesImages.forEach((files, index) => {
+        readers[index] = new FileReader();
+
+        readers[index].onloadend = () => {
+          results.push(readers[index].result);
+          if (filesImages.length === results.length) {
+            let obj = {
+              name: name.value,
+              email: email.value,
+              password: password.value,
+              fileURLs: results
+            };
+
+            let arr = JSON.parse(localStorage.getItem("User_Data")) || [];
+
+            if (editIndex === null) {
+              arr.push(obj);
+            } else {
+              arr[editIndex] = obj;
+              editIndex = null;
+              btn.innerHTML = "Submit";
+            }
+
+            localStorage.setItem("User_Data", JSON.stringify(arr));
+
+            displayData();
+
+            form.reset();
+          }
+        };
+        readers[index].readAsDataURL(files);
+      });
+    }
+  });
+
+  const displayData = () => {
+    const updatedData = JSON.parse(localStorage.getItem("User_Data")) || [];
+
+    let tr = "";
+
+    updatedData.map((item, index) => {
+  tr += `
+    <tr>
+      <td>${index + 1}</td>
+      <td>${item.name}</td>
+      <td>${item.email}</td>
+      <td>${item.password}</td>
+      <td>
+     <td>${item.fileURLs.map(
+              (image) => `<img src="${image}" alt="image" width="200px" />`
+            )}</td>
+
+            <td><button onclick="handleEdit(${index})">Edit</button><button onclick="handleDelete(${index})">Delete</button></td>
+            </tr>
+        `;
+    });
+
+    tableData.innerHTML = tr;
+  };
+
+  const handleDelete = (i) => {
+    const updatedData = JSON.parse(localStorage.getItem("User_Data")) || [];
+    updatedData.splice(i, 1);
+    localStorage.setItem("User_Data", JSON.stringify(updatedData));
+    displayData();
+  };
+
+  const handleEdit = (index) => {
+    btn.innerHTML = "Update";
+    const updatedData = JSON.parse(localStorage.getItem("User_Data")) || [];
+    name.value = updatedData[index].name;
+    email.value = updatedData[index].email;
+    password.value = updatedData[index].password;
+
+    editIndex = index;
+   
+  };
+
+  displayData();
+</script>

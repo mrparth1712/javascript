@@ -7,7 +7,7 @@
 </head>
 <body>
     <script>
-        //comparition operator ==,===,!=,!==,>,<,>=,<= 2 values are compare 
+       //1. //comparition operator ==,===,!=,!==,>,<,>=,<= 2 values are compare 
 
 
         //== operator
@@ -83,6 +83,62 @@
         let verify=10;
         console.log(agess<=verify);
 
+       //2. //logical operator and operator,or operator,not operator and or or operator truthy and falsy value aape let exampe
+
+
+        //and mate 
+        let val=0;
+        let vall=1;
+        console.log(val&&vall);//0 answer apse karan ke condition ma jose ee bey condition true thase toj ee true aapse eetle eene falsy vaalue aapi didhi 0 condition bey true no thai eetle
+
+
+        //or mate
+        let va=0;
+        let vaa=3;
+        console.log(va||vaa);//aama reuslt 3 aapyu karan ke check karse eek truthy value hase to ee truth result eetle ke eene 3 aapyu result ma
+
+
+        //and mate
+        const result='hello'&& null
+        console.log(result);
+
+        //or mate
+        const results='hello'|| null
+        console.log(results);
+
+      //symbol=&&  //and operator 2 values check both values are true to ans true aape aane eek pan flase aave to false aapi dey let example
+        let max=10;
+        let maxx=20;
+        console.log(10<20 && 10>20);//1 true and 1 false return false
+
+
+        let min=20;
+        let minn=5;
+        console.log(20>5 && 20<5);//aama 20 ee 5 karta to moto che eetle peli condition true avi aane biji condition eevu key che ke 5 20 karta moto che to ee condition false thai che eetle result false aavse banne condition sachi hoi toj true aape baki no aape true false aape
+
+        let userAge=25;
+        console.log(userAge>=18 && (userAge<=24))//aama am key cheke biji condition ma 24 ee user age karta moti che to result false aavse
+
+        //symbol || //or operator 2 value ma gme ee eek value true hoi to true aape answer.
+
+        const userss=15;
+
+
+        //aama peli contion sachi padi jai che eetle or operator true aapse game ee ek conditon sachi padvoi joiye be mathi or operator ma.
+        const isSchoolStudent=(userss>=5 && userss<=18);
+        const isCollageStudent=(userss>=18 && userss<=24);
+
+        console.log(isSchoolStudent || isCollageStudent);
+
+
+        //not operator value truthy che to falsy kari dey aane falsy ne truthy ma convert kari dese
+        let check=!null
+        console.log(check);
+        //falsy ne trurthy kari didhu.
+
+        let checks=!'hello';
+        console.log(checks);
+        //truthy ne falsy kari didhu.
 
     </script>
 </body>

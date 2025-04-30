@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>customer data 5000 api</title>
+</head>
+<body>
+        <!-- api ma tme kai api vapro cho eema je data ma object ma je key hoi ee releted aama table ma th banavu -->
+        <table border="2" cellsapcing="0" cellpadding="10">
+            <thead>
+                <tr>
+                    <th>Sr No</th>
+                    <th>Title</th>
+                    <th>Images</th>
+                </tr>
+            </thead>
+            <tbody id="tableData"></tbody>
+        </table>
+        <script>
+            //api means application programming interface
+            //api aapde online levani aane eeno data baneloj hoi  ee sidho aapde aapda program ma fetch kari levano ee api nu kam che bas aatluj hoi api ma
+            //fetch eetle api levani aane eene fetch karvani aane api ma then then aane catch compulsary aavse karan ke 1st then ma tamne api no response madse bija then ma api no data madse aane catch ma jo data nai hoi to error madse of
+    
+    
+            //fetch ma api ni website ma jaine je api levi hoi eeni google ma uper link aavi jai ee copy karine fetch ma nakhi devani ok
+    
+            fetch("https://jsonplaceholder.typicode.com/photos")
+    
+            //pchi eene then thi add karvanu then ma response madse
+             .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          // let tableData = document.getElementById("tableData");
+    
+    
+          //pchi tr create kairu aane pchi eena uper map metthod chalavi aane + eetle aaipu ke eema +index vdhe baki je navi aavse ee eekj print thase
+          let tr = "";
+    
+          data.map((ele, index) => {
+            tr += `
+              <tr>
+                <td>${ele.id}</td>
+                <td>${ele.title}</td>
+                <td><img src="${ele.url}"alt="images"/></td>
+              </tr>
+            `;
+          });
+    
+          //aane last ma table data na innerhtml ma tr je banavi eene table ma print karavi didhu
+          document.getElementById("tableData").innerHTML = tr;
+        })
+        //jo data koi resason thi no  made to aa catch execute thase ne error aapse
+        .catch((err) => console.log(err));
+        </script>
+</body>
+</html>

@@ -1,105 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crud operation edit  and delete perfrorm</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
-
 <body>
-    <!-- form banavyu -->
+
+  <!-- pela eek form banavyu  -->
+
     <form id="form">
-        <input type="text" placeholder="enter the name" id="name" required/>
-        <br><br>
-        <input type="email" placeholder="enter the email" id="email" required/>
-        <br><br>
-        <input type="password" placeholder="enter the password" id="password" required/>
-        <br><br>
-        <input type="submit">submit</button>
+      <input type="text" placeholder="Enter Name" id="name" />
+      <br /><br />
+      <input type="email" placeholder="Enter Email" id="email" />
+      <br /><br />
+      <input type="password" placeholder="Enter password" id="password" />
+      <br /><br />
+      <textarea id="address" placeholder="Address"></textarea>
+      <br /><br />
+      <select id="country">
+        <option value="">---Select---</option>
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+        <option value="UK">UK</option>
+        <option value="Canada">Canada</option>
+        <option value="Nepal">Nepal</option>
+      </select>
+      <br /><br />
+      <button type="submit" id="submit_btn">Submit</button>
     </form>
-    <br>
-    <!-- table banavvyu khali te table row means uper na heading banava khalii -->
-     <table border="2" cellspacing="0" cellpadding="10">
-        <thead>
-            <tr>
-                <tr>Sr No</tr>
-                <tr>name</tr>
-                <tr>Email</tr>
-                <tr>Password</tr>
-                <tr>Actions</tr>
-            </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-     </table>
-     <script>
-        //badha ne target karvana pela je upper form ne tabale ma banavyu hoi ee
-        let form=document.getElementById("form");
-        let name=document.getElementById("name");
-        let email=document.getElementById("email");
-        let pass=document.getElementById("password");
-        let tableBody=document.getElementById("tableBody");
+    <br /><br />
+    <!-- table banavyu -->
+    <table border="2" cellpadding="10" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Sr No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Address</th>
+          <th>Country</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
 
-        //submit event uper aa function banavu form ni event uper kam nai kare
-        form.addEventListener("submit",(event)=>{
-             //aa event preventdefault chene form no data refresh thai ne direct vai no jai eetle compulsary lakhvu aane uper arrow function ma event bhi compulsary lakhvu
-            event.preventDefault();
+      <tbody id="tableData"></tbody>
+    </table>
+<script>
+  //badhai ne target kari didhu
+  let form = document.getElementById("form");
+  let name = document.getElementById("name");
+  let email = document.getElementById("email");
+  let password = document.getElementById("password");
+  let address = document.getElementById("address");
+  let country = document.getElementById("country");
+  let tableData = document.getElementById("tableData");
+  let submit_btn = document.getElementById("submit_btn");
+  let editIndex = null;
 
-            let obj={
-                name:name.value,
-                email:email.value,
-                pass:pass.value
-            };
 
-            let arr=
-            JSON.parse(localStorage.getItem("User_Data"))||[];//aa condition eetle aapi ke jayre arr khali hse tyre navo data eema store thai jse
-              //push method je navo data aavse eene add karse last ma
-              arr.push(obj);
+  //button ni submit uper event chalavi form event uper kam nai kare
+  form.addEventListener("submit", (event) => {
 
-              
-            //obj or arr of object store karo tayre tene compuulsary stringify ma badalvu pade
-            localStorage.setItem("DATA",JSON.stringify(arr));
+    //form ne refresh thatha aatkavse 
+    event.preventDefault();
+ 
 
-            //data display karava
-            displayData();
+    //object banavyo aane most important vat ke local storage ma gme ee data type ma store thase but jayre object aane array of object aavse tayre eema tene json.setitem stingify ma farajiyat feravu padse baki nai thai
+    //aane parse mate localstorage mathi data laiye chiye eetle get item karvu padse
+    let obj = {
+      name: name.value,
+      email: email.value,
+      password: password.value,
+      address: address.value,
+      country: country.value
+    };
 
-             //form ne reset karva mate
-             event.target.reset();
-        });
 
-        //aahithi no samjanu sir ne puchvu
+    //data get karvyo aane blank array eetle aapyo ke peli var data hase tyrej work karse
+    let arr = JSON.parse(localStorage.getItem("User_Data")) || [];
+  
 
-        const displayData = () => {
-    let updatedData = JSON.parse(localStorage.getItem("User_Data"));
+    //eek condition chalavi jp edit index ee null ni barabar hase to array ma object push thai jase
+    if (editIndex === null) {
+      arr.push(obj);
+    } else {
+      arr[editIndex] = obj;
+      submit_btn.innerHTML = "Submit";
+      editIndex = null;
+    }
+    //date ne object mathi arr ma convert kairo aane array ne store karavi didho
+    localStorage.setItem("User_Data", JSON.stringify(arr));
+
+
+    //niche display data name nu function call karavyu
+    displayData();
+
+
+    //form ne reset karva mate jayre 1 data store thai jase tayre form eeni jate reset thai jase
+    event.target.reset();
+  });
+
+
+//hve localstorage ma je data che eene je screen uper khali table che eema data show karva mate aa banavyu che
+  const displayData = () => {
+    const updatedData = JSON.parse(localStorage.getItem("User_Data")) || [];//data ne local storage mathi laviye chiye eetle get kairu
 
     let tr = "";
 
 
-    //aama +chene ee index ni value 0 thi aapse aane jo + nai aapo to tmne je current data upate karo cho eej index print karse aane `` aa symbol aapo tyre eene print krva mate hamesha $ aapvu padse and map mate aandar 2 parameter aapva padse
+    //tr +1 eetle aapyu cheke index + thase aane aagad aagad vadhse and bactiks `` vapary che eetle always $ni sign aavse print karva mate and map method chalavi  che updated data uper eetle navo data create kari ne aapse
     updatedData.map((item, index) => {
       tr += `
-      <tr>
+        <tr>
           <td>${index + 1}</td>  
           <td>${item.name}</td>  
           <td>${item.email}</td>  
-          <td>${item.pass}</td>  
-          <td><button>Edit</button><button onclick="handleDelete(${index})">Delete</button></td>  
-          </tr>
-          `;
+          <td>${item.password}</td>  
+          <td>${item.address}</td>  
+          <td>${item.country}</td>  
+          <td><button onclick="handleEdit(${index})">Edit</button><button onclick="handleDelete(${index})">Delete</button></td>  
+        </tr>
+      `;
     });
+    tableData.innerHTML = tr;//table data ma je value nakhi hoi ee pchi tr ma vai jai eena mate table data inner html lakhyu che
 
-    tableBody.innerHTML = tr;
+    //uper on click ma handle edit ne handle delete eetle aapyu cheke function call karravi didhu chee aane function niche create kairu che
   };
 
-//   const handleDelete = (index) => {
-//     // console.log(index);
-//     let updatedData = JSON.parse(localStorage.getItem("User_Data"));
-//     updatedData.splice(index, 1);
-//     localStorage.setItem("User_Data", JSON.stringify(updatedData));
-//     displayData();
-//   };
 
-//   displayData();
+  //handle delete name nu funtion create kairu che aane arrow fuuctiion banavyu che aane eema splice name ni method use kari che reason ee che ke delete button press karso to koi eekj delete thase jo splice no use kairo hase to
+  const handleDelete = (index) => {
+    const updatedData = JSON.parse(localStorage.getItem("User_Data")) || [];
+    updatedData.splice(index, 1);
+    localStorage.setItem("User_Data", JSON.stringify(updatedData));
+    displayData();
+  };
 
-     </script>
+
+  // handle edit name nu function kairu che aane arrow function banavyu che aane badhi value ne eeni index .name thi updated data ne laviye chiye
+  const handleEdit = (index) => {
+    const updatedData = JSON.parse(localStorage.getItem("User_Data")) || [];
+
+    // console.log(updatedData[index].name);
+    // console.log(updatedData[index].email);
+    // console.log(updatedData[index].password);
+    // console.log(updatedData[index].address);
+    // console.log(updatedData[index].country);
+
+    name.value = updatedData[index].name;
+    email.value = updatedData[index].email;
+    password.value = updatedData[index].password;
+    address.value = updatedData[index].address;
+    country.value = updatedData[index].country;
+
+    editIndex = index;
+
+    //jayreee user edit button click kare tyre edit thaya pchi eema upadte nu button aavi jai aane pchi pchi eeni jaate update thaya bad ee submit thai jase
+    submit_btn.innerHTML = "Update";
+  };
+
+  displayData();//display data function ne call karavyu aahiya
+  </script>
 </body>
 </html>

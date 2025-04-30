@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class prototype static </title>
+</head>
+<body>
+    <script>
+        //object banvyo aane eeni aandar function banavyu 
+        //object ni aandar tme function banavi sako
+        //this keyword current object no reference aaape
+        let obj={
+            carName:"xuv",
+            comapny:"mahindra",
+            model:2022,
+            cc:3200,
+           info: function(){
+               console.log(`carName : ${this.carName}, Company : ${this.company}, model : ${this.type}, cc : ${this.cc}cc`);
+
+            }
+        };
+        console.log(obj);
+    
+
+        //oops object oriented programming
+        //class =classs ne bluprint kevai aane mould pan kevai 
+        //constructor class bne eetle automatically call thai jai
+        //prototype method aapde jate create kariye eene prototype kevai
+        //Static methods are called on the class, not on instances.
+        //In JavaScript, a static method is a method defined on the class itself, not on instances of the class. You use the static keyword to define it.\
+
+        //class 
+        class Students{
+            //constructor method
+            //jo koi city nai aape to automatically ahmedabad lai lese
+
+            //aama eevu akiru cheke pella eek class banavyo che aane pchi 
+            //prototype method banavi message name ni aane pchi
+            //eema this thi value lai liidhi aane last ma variable laine
+            //eema value aapi didhi aane eene message prototype ne print karvavi didhu.
+            constructor(name,age,city="ahmedabad"){
+                //this.name ee key che aane =name ee value che
+                console.log("Constructor called!");
+                this.name=name;
+                this.age=age;
+                this.city=city;
+            }
+           
+            //prototype  method eek method bija class ma use kari sako
+            message(){
+                console.log(`hii i am ${this.name} and my age is ${this.age}and address:${this.city}`
+                );
+              
+            }
+
+            //static method object ma kam ny kre class ma kam krse
+            static hello(){
+                console.log("static method...");
+             
+            }
+        }
+        //static method call kari
+   Students.hello();
+       
+        let a=new Students("parth",22,"mumbai");
+        a.message();
+
+
+    </script>
+</body>
+</html>

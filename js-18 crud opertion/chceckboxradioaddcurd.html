@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="form">
+      <label for="name">Name : </label>
+      <input type="text" id="name" />
+      <br /><br />
+      <label for="email">Email : </label>
+      <input type="email" id="email" />
+      <br /><br />
+      <label for="pass">Password : </label>
+      <input type="password" id="pass" />
+      <br /><br />
+
+      <!-- checkbox and radio button mate pela input type levu and compulsary eema class ne value aapvi padse toj perfect value aapse ee banne -->
+      <label for="">Gender : </label>
+      <input type="radio" id="male" name="gender" value="Male" />
+      <label for="male">Male</label>
+      <input type="radio" id="female" name="gender" value="Female" />
+      <label for="female">Female</label>
+      <input type="radio" id="other" name="gender" value="Other" />
+      <label for="other">Other</label>
+      <br /><br />
+      <label for="qual">Qualification : </label>
+      <input type="checkbox" id="10th" class="qual" value="10th" />
+      <label for="10th">10th</label>
+      <input type="checkbox" id="12th" class="qual" value="12th" />
+      <label for="12th">12th</label>
+      <input type="checkbox" id="BCA" class="qual" value="BCA" />
+      <label for="BCA">BCA</label>
+      <input type="checkbox" id="MCA" class="qual" value="MCA" />
+      <label for="MCA">MCA</label>
+      <br /><br />
+      <button type="submit" id="submit_btn">Submit</button>
+    </form>
+    <br /><br />
+    <table border="1" cellspacing="0" cellpadding="10">
+      <thead>
+        <tr>
+          <th>Sr No</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Gender</th>
+          <th>Qualification</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableData"></tbody>
+    </table>
+  </body>
+</html>
+<script>
+  let form = document.getElementById("form");
+  let name = document.getElementById("name");
+  let email = document.getElementById("email");
+  let password = document.getElementById("pass");
+  let submit_btn = document.getElementById("submit_btn");
+  let tableData = document.getElementById("tableData");
+  let editIndex = null;
+
+
+  //submit ni on click uper arrow function banavyu 
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+
+    //radio button ma eekj select thase eetle query selector lidhu aane eema gender jayre chcecked thai tyre select thai eetle :checked aapvu
+    let gender = document.querySelector('input[name="gender"]:checked');
+
+
+    //qualification mate tamre eek array ni method from vaparvi padse aane id nai chale class levo padse aane eema pan checked aapvu paddse pchi navo data mate eeni uper map method chalavi padse
+    let qualification = Array.from(
+      document.querySelectorAll(".qual:checked")
+    ).map((check) => check.value);
+
+    // console.log(qualification);
+
+    // console.log(gender.value);
+
+    let obj = {
+      name: name.value,
+      email: email.value,
+      pass: pass.value,
+      gender: gender.value,
+      qualification: qualification
+    };
+
+    let arr = JSON.parse(localStorage.getItem("DATA")) || [];
+
+    if (editIndex === null) {
+      arr.push(obj);
+    } else {
+      arr[editIndex] = obj;
+      editIndex = null;
+      submit_btn.innerHTML = "Submit";
+    }
+
+    localStorage.setItem("DATA", JSON.stringify(arr));
+
+    displayData();
+
+    form.reset();
+  });
+
+  const displayData = () => {
+    const updatedData = JSON.parse(localStorage.getItem("DATA")) || [];
+
+    let tr = "";
+
+    updatedData.map((ele, index) => {
+      tr += `
+      
+        <tr>
+          <td>${index + 1}</td>
+          <td>${ele.name}</td>
+          <td>${ele.email}</td>
+          <td>${ele.pass}</td>
+          <td>${ele.gender}</td>
+
+          <td>${ele.qualification.join(" ")}</td> 
+          <td><button onclick="handleEdit(${index})">Edit</button onclick="handleDelete(${index})"><button> Delete</button></td>
+          </tr>
+          `;
+    });
+    tableData.innerHTML = tr;
+    //join etele lidhu ke eema je chcekbox select thase eetle eene multiple value ne join kari aapse
+  };
+
+  const handleDelete = (index) => {
+    // console.log(index);
+     //data store karva mate data pela lavo to padse ne eetle aa karavyu
+    let updatedData = JSON.parse(localStorage.getItem("User_Data"));
+    updatedData.splice(index, 1);
+    localStorage.setItem("User_Data", JSON.stringify(updatedData));
+    displayData();
+  };
+
+
+  const handleEdit = (index) => {
+    editIndex = index;
+    submit_btn.innerHTML = "Update";
+
+    const updatedData = JSON.parse(localStorage.getItem("DATA")) || [];
+
+    name.value = updatedData[index].name;
+    email.value = updatedData[index].email;
+    pass.value = updatedData[index].pass;
+
+
+    //aa radio button mate banavyu che and attribute ne select karva mate [] aa vaprvu javascript ma
+    document.querySelector(
+      input[name="gender"][value="${updatedData[index].gender}"]
+    ).checked = true;
+
+
+    //aa checkbox mate banavyu che eema queryselector all levu padse karan ke eek sathe vadhare checkbox ma select thai ena mate aane includes vaparvu padse and aama array leva mate for each method no use karvo padse
+    document
+      .querySelectorAll(".qual")
+      .forEach(
+        (box) =>
+          (box.checked = updatedData[index].qualification.includes(box.value))
+      );
+  };
+ 
+  displayData();
+ 
+</script>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+<body>
+    <script>
+          //promises eeni mate vaprata names pending,resolve,reject
+        //promise mate pela to samaj example tarike hu koi girl ne date nu kav chu ke kale tne date uper lai jais to ee javascript ni language ma eene resolve kevai aane jo eene kalnu kai ne kale no lai jav ne param divse lai jav to eene pending kevai reason ke eene kalnu kidhu pan kale no lai gyo aane pchi param divse lai gyo eene pending kevai aane daru pi gyo ne eene jem fave am keva maindo to date ma javanuj cancle thai jai to eene reject kevai
+        
+        //niche eevu keva mange che ke jo age 18 karta moti hoi to resovle tha baki reject tha but aatlu krvathi kai console ma jova nai made
+      let promises=new Promise((resolve,reject)=>{
+        let age=20;
+        if(age>18){
+            resolve("eligible for voting...");
+        }else{
+            reject("not eligible for voting...");
+        }
+        //tme aa rite pun eek line ma aapi sako
+        promise.then((data) => console.log(data)).catch((err) => console.log(err));
+      })
+      //hve then aapvu padse aane catch aapvu padse jo condition sachi pade to then run thase baki catch run thase aane  aama {}karvani jarur nthi karan ke eekj line ma che eetle
+      //second method aa rite pan print karavi sako ok done.
+      .then((data)=>console.log(data))
+      .catch((err)=>console.log(err));
+
+      //then aane catch ma arrow function che eetle eek parameter aapvo padse ee gme te aapi sako but eena releted aapvu to khbr pade
+      
+
+  
+  
+    </script>
+</body>
+</html>
