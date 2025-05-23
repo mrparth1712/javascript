@@ -6,18 +6,50 @@
     <title>create bank account using oops </title>
 </head>
 <body>
-    <h2>Create Account Form</h2>
-    <form id="accountForm">
-        <input type="text" placeholder="Enter Customer Name" id="customerName"/>
-        <br><br>
-        <input
-        type="number"
-        placeholder="Enter Initial Balance"
-        id="initialBalance"
-      />
-      <br><br>
-      <button type="submit">Create Account</button>
-    </form>
+  <!-- Create Account Form -->
+<h2><u>Create Account Form</u></h2>
+<form id="accountForm">
+  <input type="text" placeholder="Enter Customer Name" id="customerName" />
+  <br><br>
+  <input type="number" placeholder="Enter Initial Balance" id="initialBalance" />
+  <br><br>
+  <button type="submit">Create Account</button>
+</form> <!-- CLOSE this form before starting the next -->
+
+<!-- Deposit Form -->
+<h2><u>Deposit Form</u></h2>
+<form id="depositForm">
+  <input type="number" placeholder="Enter Account Number" id="depositAccountNumber" />
+  <br><br>
+  <input type="number" placeholder="Enter Deposit Amount" id="depositAmount" />
+  <br><br>
+  <button type="submit">Deposit</button>
+</form>
+
+<!-- Withdraw Form -->
+<h2><u>Withdraw Form</u></h2>
+<form id="withdrawForm">
+  <input type="number" placeholder="Enter Account Number" id="withdrawAccountNumber" />
+  <br><br>
+  <input type="number" placeholder="Enter Withdraw Amount" id="withdrawAmount" />
+  <br><br>
+  <button type="submit">Withdraw</button>
+</form>
+
+
+
+        <!-- table banavyu table ma data print karava -->
+        <table border="2" cellspacing="10" cellpadding="10">
+            <thead>
+              <tr>
+                <th>Sr No</th>
+                <th>Customer Name</th>
+                <th>Account Number</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody id="tableData"></tbody>
+          </table>
     <script>
         //bank account
 
@@ -47,6 +79,7 @@
 
   //array banavyoo badho data array ma jase 1 1 object store karavo hard pade
   let accounts = [];
+  //badho data aa accounts array ma aavi jse
 
   //form ni submit uper click karvathi thase 
   accountForm.addEventListener("submit",(event)=>{
@@ -69,6 +102,78 @@
     event.target.reset();
   });
 
+  //deposit form mate aa banavyu che
+
+  //badha ne target kaira pela
+  let depositForm = document.getElementById("depositForm");
+  let depositAccountNumber = document.getElementById("depositAccountNumber");
+  let depositAmount = document.getElementById("depositAmount");
+
+
+  //submit uper addeventlistener chalavyu
+  depositForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+
+    //find method chene find karse je pela user ee account number nakhyo che eene check karse aane localstorage ma che eene pan check karse bane match thase toj aagd process karse
+    let account1 = accounts.find(
+      (account) => account.accountNumber === +depositAccountNumber.value
+    );
+
+    //condition aapi 
+    if (account1) {
+      account1.deposit(+depositAmount.value);
+      localStorage.setItem("BankAccount", JSON.stringify(accounts));
+      displayData();
+    } else {
+      alert("Please Enter Valid Account Number...");
+    }
+
+    console.log(accounts);
+
+    e.target.reset();
+  });
+
+  let withdrawForm = document.getElementById("withdrawForm");
+  let withdrawAccountNumber = document.getElementById("withdrawAccountNumber");
+  let withdrawAmount = document.getElementById("withdrawAmount");
+
+  withdrawForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    //find method chene find karse je pela user ee account number nakhyo che eene check karse aane localstorage ma che eene pan check karse bane match thase toj aagd process kars
+    let account1 = accounts.find(
+      (account) => account.accountNumber === +withdrawAccountNumber.value
+    );
+
+
+    //condition chalavi
+    if (account1) {
+      account1.withdraw(+withdrawAmount.value);
+      localStorage.setItem("accounts", JSON.stringify(accounts));
+      displayData();
+    } else {
+      alert("Please Enter Valid Account Number...");
+    }
+
+    console.log(accounts);
+    e.target.reset();
+  });
+
+//table je che screen uper eema data show karava
+const displayData = () => {
+  let tr = "";
+  accounts.map((account, index) => {
+    tr += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${account.customerName}</td>
+        <td>${account.accountNumber}</td>
+        <td>${account.balance}</td> <!-- fixed this line -->
+      </tr>
+    `;
+  });
+  document.getElementById("tableData").innerHTML = tr;
+};
     </script>
 </body>
 </html>

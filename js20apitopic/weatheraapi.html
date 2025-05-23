@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather API Display</title>
+</head>
+<body>
+  <h1>Weather Information</h1>
+  <div id="weatherInfo"></div>
+
+  <script>
+  //  You can replace this with a real API call like:
+    fetch("https://api.weatherapi.com/v1/current.json?key=YOUR_KEY&q=London")
+      .then(response => response.json())
+      .then(data => {  });
+
+    //Simulated API response using your provided data
+    const data = {
+      "location": {
+        "name": "London",
+        "region": "City of London, Greater London",
+        "country": "United Kingdom",
+        "lat": 51.52,
+        "lon": -0.11,
+        "tz_id": "Europe/London",
+        "localtime": "2021-02-21 8:42"
+      },
+      "current": {
+        "last_updated": "2021-02-21 08:30",
+        "temp_c": 11,
+        "condition": {
+          "text": "Partly cloudy",
+          "icon": "//cdn.weatherapi.com/weather/64x64/day/116.png"
+        },
+        "wind_kph": 6.1,
+        "humidity": 82,
+        "feelslike_c": 9.5,
+        "uv": 1
+      }
+    };
+
+    const weatherInfo = `
+      <h2>${data.location.name}, ${data.location.country}</h2>
+      <p><strong>Region:</strong> ${data.location.region}</p>
+      <p><strong>Local Time:</strong> ${data.location.localtime}</p>
+      <img src="https:${data.current.condition.icon}" alt="${data.current.condition.text}">
+      <p><strong>Condition:</strong> ${data.current.condition.text}</p>
+      <p><strong>Temperature:</strong> ${data.current.temp_c} °C</p>
+      <p><strong>Feels Like:</strong> ${data.current.feelslike_c} °C</p>
+      <p><strong>Humidity:</strong> ${data.current.humidity}%</p>
+      <p><strong>Wind:</strong> ${data.current.wind_kph} kph</p>
+      <p><strong>UV Index:</strong> ${data.current.uv}</p>
+    `;
+
+    document.getElementById("weatherInfo").innerHTML = weatherInfo;
+  </script>
+</body>
+</html>

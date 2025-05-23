@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>add to cart project</title>
+    <style>
+      img {
+        width: 200px;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background: #f9f9f9;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      #products,
+      #cart {
+        max-width: 1000px;
+        margin: 20px auto;
+      }
+
+      .product-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        padding: 15px;
+        background: #fff;
+        border: 1px solid #ddd;
+        gap: 20px;
+      }
+
+      .product-container img {
+        width: 100px;
+        border-radius: 8px;
+      }
+
+      .product-container button {
+        margin-left: auto;
+        padding: 8px 12px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .cart-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+      }
+
+      .cart-table th,
+      .cart-table td {
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+      }
+
+      .cart-table img {
+        width: 60px;
+        border-radius: 8px;
+      }
+
+      .qty-controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .qty-controls button {
+        padding: 4px 8px;
+        border: 1px solid #ccc;
+        background: #f0f0f0;
+        cursor: pointer;
+      }
+
+      .summary {
+        text-align: right;
+        margin-top: 20px;
+      }
+
+      .summary h3 {
+        margin-bottom: 10px;
+      }
+
+      #clearCart {
+        margin-top: 10px;
+        padding: 10px 20px;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- first add to cart project ma kevu  hoi ke pela eek array of object bane pchi eenu ui bane product nu pchi ee ui banyu hoi eema thi eek nvo array of object made je product add kari hoi ee aane pchi pchu arrray of object banavanu aaane pchi ene bija page ma show karvanu bas aa hoi add to cart ma -->
+
+    <!-- eek new dicv banavyu aane eema product name ni id lidhi  -->
+    <div id="products">
+      <div>
+        <h2>Our Products</h2>
+
+        <!-- product show thase -->
+        <div id="product_list"></div>
+      </div>
+
+      <!-- eek cart banavyu aane eema eek button banavyu -->
+      <div id="cart">
+        <h2>Cart</h2>
+        <!-- button uper click thai eetle show thai eena mate product_show banavyu -->
+        <ul id="product_show"></ul>
+        <h3 id="price_show"></h3>
+        <button id="clearCart">Clear Cart</button>
+      </div>
+    </div>
+    <script>
+      let cartItems = JSON.parse(localStorage.getItem("DATA")) || [];
+      let total_Price = parseFloat(localStorage.getItem("Price")) || 0;
+
+      // Fetch products from API
+      async function fetchProducts() {
+        const response = await fetch(
+          "https://fakestoreapi.com/products?limit=6"
+        ); // You can adjust the limit
+        const products = await response.json();
+        showProducts(products);
+      }
+
+      function showProducts(products) {
+        const productList = document.getElementById("product_list");
+        productList.innerHTML = ""; // Clear before appending new items
+
+        products.forEach((product, index) => {
+          const productContainer = document.createElement("div");
+          productContainer.classList.add("product-container");
+
+          productContainer.innerHTML = `
+                <img src="${product.image}" alt="product_image" />
+                <h3>${product.title}</h3>
+                <button class="add_to_cart">Add To Cart $${product.price}</button>
+            `;
+
+          productList.appendChild(productContainer);
+
+          // Add click event
+          const button = productContainer.querySelector(".add_to_cart");
+          button.addEventListener("click", () => {
+            cartItems.push({
+              image: product.image,
+              name: product.title,
+              price: product.price,
+            });
+
+            total_Price += product.price;
+
+            localStorage.setItem("DATA", JSON.stringify(cartItems));
+            localStorage.setItem("Price", total_Price.toFixed(2));
+
+            ShowCart();
+          });
+        });
+      }
+
+      const ShowCart = () => {
+        let price = document.getElementById("price_show");
+        document.getElementById("product_show").innerHTML = "";
+
+        cartItems.forEach((cart, index) => {
+          let li = document.createElement("li");
+          li.innerHTML = `
+                <img src="${cart.image}" alt="cart_img"/>
+                <h3>${cart.name} - $${cart.price}</h3>
+                <button class="delete_item" data-index="${index}">Delete</button>
+            `;
+          document.getElementById("product_show").appendChild(li);
+        });
+
+        price.innerText = `Total $${total_Price.toFixed(2)}`;
+
+        let deleteButtons = document.querySelectorAll(".delete_item");
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", (e) => {
+            let itemIndex = e.target.getAttribute("data-index");
+            total_Price -= cartItems[itemIndex].price;
+            cartItems.splice(itemIndex, 1);
+            localStorage.setItem("DATA", JSON.stringify(cartItems));
+            localStorage.setItem("Price", total_Price.toFixed(2));
+            ShowCart();
+          });
+        });
+      };
+
+      document.getElementById("clearCart").addEventListener("click", () => {
+        cartItems = [];
+        total_Price = 0;
+        localStorage.setItem("DATA", JSON.stringify(cartItems));
+        localStorage.setItem("Price", total_Price.toFixed(2));
+        ShowCart();
+      });
+
+      fetchProducts(); // Fetch and display products
+      ShowCart(); // Display cart from local storage
+    </script>
+  </body>
+</html>

@@ -31,17 +31,36 @@
         }
 
         //using prompt user pase value lese pchi output aapse
-        let username=prompt("plz enter your name");
-        let age=prompt("plz enter your age");
-        if(age>=18){
-            console.log("collage student");
-        }else{
-            console.log("officer");
+        // let username=prompt("plz enter your name");
+        // let age=prompt("plz enter your age");
+        // if(age>=18){
+        //     console.log("collage student");
+        // }else{
+        //     console.log("officer");
+        // }
+
+        //nested if if ni aandarr if
+       let rain=true;
+       let clouds=true;
+       if(rain){
+        if(clouds){
+            console.log("pick umbrella");
         }
-        let text;
+       }
 
 
-
+       //id password if ni aandar if pchi else
+       let id="parth@gmail.com";
+       let pass="123";
+       if(id==="parth@gmail.com"){
+        if(pass===234){
+            console.log("user true");
+        }else{
+            console.log("invalid password");
+        }
+       }else{
+        console.log("user name is incorreect");
+       }
     </script>
 </body>
 </html>

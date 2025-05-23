@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corona Api</title>
+</head>
+<body>
+    <table border="1" cellpadding="10">
+        <thead>
+            <tr>
+                <th>Sr No</th>
+                <th>Location</th>
+                <th>Confirmed Cases</th>
+            </tr>
+        </thead>
+        <tbody id="tableData"></tbody>
+    </table>
+
+    <script>
+        fetch("https://api.rootnet.in/covid19-in/stats/latest")
+            .then((response) => response.json())
+            .then((responseData) => {
+                console.log(responseData);
+                let tableData = "";
+                const regions = responseData.data.regional;
+
+                regions.map((region, index) => {
+                    tableData += `
+                        <tr>
+                            <td>${index + 1}</td>
+                            <td>${region.loc}</td>
+                            <td>${region.totalConfirmed}</td>
+                        </tr>
+                    `;
+                });
+
+                document.getElementById("tableData").innerHTML = tableData;
+            })
+            .catch((err) => console.log(err));
+    </script>
+</body>
+</html>
